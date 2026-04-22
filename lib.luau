@@ -1361,27 +1361,21 @@ local Library do
                     Items["Outline"]:MakeDraggable()
                 end
 
-                -- Glow effect (accent-colored layered strokes)
-                for i = 1, 15 do
-                    local GlowLayer = Instances:Create("Frame", {
-                        Parent = Items["Outline"].Instance,
-                        AnchorPoint = Vector2New(0.5, 0.5),
-                        Position = UDim2New(0.5, 0, 0.5, 0),
-                        Size = UDim2New(1, i * 4, 1, i * 4),
-                        BackgroundTransparency = 1,
-                        BorderSizePixel = 0,
-                        Name = "\0",
-                    })
-
-                    Instances:Create("UIStroke", {
-                        Parent = GlowLayer.Instance,
-                        Color = FromRGB(31, 226, 130),
-                        Thickness = 5,
-                        Transparency = 0.7 + (i / 15) * 0.3,
-                        ApplyStrokeMode = Enum.ApplyStrokeMode.Border,
-                        LineJoinMode = Enum.LineJoinMode.Round,
-                    }):AddToTheme({Color = "Accent"})
-                end
+                -- Glow effect (perfect smooth image blur)
+                Instances:Create("ImageLabel", {
+                    Parent = Items["Outline"].Instance,
+                    AnchorPoint = Vector2New(0.5, 0.5),
+                    Position = UDim2New(0.5, 0, 0.5, 0),
+                    Size = UDim2New(1, 46, 1, 46), -- 23px of glow padding on all sides
+                    BackgroundTransparency = 1,
+                    Image = "rbxassetid://5028857472",
+                    ImageColor3 = FromRGB(31, 226, 130),
+                    ImageTransparency = 0.25,
+                    ScaleType = Enum.ScaleType.Slice,
+                    SliceCenter = Rect.new(24, 24, 276, 276),
+                    ZIndex = 0,
+                    Name = "\0",
+                }):AddToTheme({ImageColor3 = "Accent"})
 
                 Instances:Create("UIStroke", {
                     Parent = Items["Outline"].Instance,
